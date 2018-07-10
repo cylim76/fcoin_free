@@ -7,9 +7,11 @@
 
 import configparser
 
+section = 'section'
+
 #多个设置的时候 每次启动程序时输入参数section, 调用conf.ini中的对应设置
 # section = input('请输入section') or 'section'
-section = 'section'
+
 
 
 conf = configparser.ConfigParser()
