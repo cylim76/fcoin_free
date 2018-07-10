@@ -6,8 +6,8 @@
 
 from fcoin import Fcoin
 from fcoin_websocket.fcoin_client import fcoin_client
-from auth import api_key, api_secret
-from config import symbols, second, amount, price_difference, is_direct_buy
+# from auth import api_key, api_secret
+from config import symbols, second, amount, price_difference, is_direct_buy, api_key, api_secret
 import os, time, base64
 
 symbol = symbols[0] + symbols[1]
