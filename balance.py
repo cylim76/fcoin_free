@@ -5,8 +5,8 @@
 # @Last Modified time: 2018-06-25 13:24:31
 
 from fcoin import Fcoin
-from auth import api_key, api_secret
-from config import symbol_type
+# from auth import api_key, api_secret
+from config import symbol_type, api_key, api_secret
 
 # 初始化
 fcoin = Fcoin(api_key, api_secret)
