@@ -5,8 +5,8 @@
 # @Last Modified time: 2018-06-25 10:49:07
 
 from fcoin import Fcoin
-from auth import api_key, api_secret
-from config import symbols, fees_start_time
+# from auth import api_key, api_secret
+from config import symbols, fees_start_time, api_key, api_secret
 from datetime import datetime
 import time
 
