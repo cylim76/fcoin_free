@@ -32,11 +32,12 @@ def get_balance_action(symbols):
     print('-' * 55)
     for k in range(len(mx_sort)):
         for i in mingxi:
-            if i['currency'] == mx_sort[k]:
-                print('|{:^8}|{:>14.4f}|{:>14.4f}|{:>14.4f}|'.format(i['currency'].upper(),
-                                                                     float(i['balance']),
-                                                                     float(i['frozen']),
-                                                                     float(i['available'])))
+            if i['currency']  in symbol_type: #只显示 symbol_type中的币种资产,屏蔽此行显示全部币种
+                if i['currency'] == mx_sort[k]:
+                    print('|{:^8}|{:>14.4f}|{:>14.4f}|{:>14.4f}|'.format(i['currency'].upper(),
+                                                                         float(i['balance']),
+                                                                         float(i['frozen']),
+                                                                         float(i['available'])))
     print('-' * 55)
 
 
