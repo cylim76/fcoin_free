@@ -101,7 +101,7 @@ def print_report():
                      'buyamt': float(tradelist_line['executed_value']), 'buyfee': float(tradelist_line['fill_fees'])})
 
             tradecount_symbol.append(tradelist_line['symbol'])
-
+            continue  # 第一次出现的交易对,插入字典后进入下一个交易记录的统计
         # 已有的加法处理
         for tradecount_line in tradecount:
             if tradecount_line['symbol'] == tradelist_line['symbol']:
