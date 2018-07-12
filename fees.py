@@ -132,11 +132,11 @@ def print_report():
             buyavg = data['buyamt'] / data['buyqty']
         else:
             buyavg = 0
-
-        print('卖出金额 : {:<10.2f} \t\t卖出数量 : {:<10.2f} \t\t卖出均价 : {:<14.6f}\t\t手续费 :  {:<8.2f} '
-              .format(data['sellamt'], data['sellqty'], sellavg, data['sellfee']))
-        print('买入金额 : {:<10.2f} \t\t买入数量 : {:<10.2f} \t\t买入均价 : {:<14.6f}\t\t手续费 :  {:<8.2f} '
-              .format(data['buyamt'], data['buyqty'], buyavg, data['buyfee']))
+      #币种卖出统一称之为数量,  计价货币 称为金额
+        print('卖出数量 : {:<10.2f} \t\t卖出金额 : {:<10.2f} \t\t卖出均价 : {:<14.6f}\t\t手续费 :  {:<8.2f} '
+              .format(data['sellqty'], data['sellamt'],  sellavg, data['sellfee']))
+        print('买入数量 : {:<10.2f} \t\t买入金额 : {:<10.2f} \t\t买入均价 : {:<14.6f}\t\t手续费 :  {:<8.2f} '
+              .format(data['buyqty'], data['buyamt'],  buyavg, data['buyfee']))
 
     print('-' * 120)
 
