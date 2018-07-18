@@ -15,6 +15,7 @@ import smtplib
 import balance
 import fees
 from config import from_addr, password, to_addr, smtp_server, filename
+import datetime
 
 
 
@@ -35,6 +36,8 @@ msg = MIMEText('<html><body><h1>Hello</h1>' +
     '<p>send by <a href="http://www.baidu.com">Python</a>...</p>' +
     '</body></html>', 'html', 'utf-8')
 """
+t = datetime.datetime.now()
+date = datetime.datetime.strftime(t, '%Y%m%d %H%M%S')
 
 #"""带附件发送邮件的 msg
 msg = MIMEMultipart()
@@ -42,7 +45,7 @@ msg = MIMEMultipart()
 
 msg['From'] = _format_addr('lucas  <%s>' % from_addr)
 msg['To'] = _format_addr('lucas <%s>' % to_addr)
-msg['Subject'] = Header('邮件标题 …', 'utf-8').encode()
+msg['Subject'] = Header('Fcoin-' +str(date), 'utf-8').encode()
 
 f = open(filename, 'r')
 msgcon = ''''''
@@ -52,6 +55,8 @@ while True:
     if not line:
         break
 f.close()
+
+
 
 # 带附件发送的 邮件正文是MIMEText:
 msg.attach(MIMEText(msgcon, 'plain', 'utf-8'))
