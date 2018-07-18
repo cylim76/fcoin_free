@@ -43,7 +43,7 @@ def fees(after=None, state='filled'):
 
 
 # 输出报表
-def print_report():
+def print_report(filename=None):
     global count, tradecount, symbol
     count = 1
     # 多个交易对 挨个都查询交易记录,交易对symbol_couple信息在 conf.ini 设置
@@ -54,8 +54,16 @@ def print_report():
     for i in range(len(tradelist)):
         mx_sort.append(tradelist[i]['created_at'])
     mx_sort.sort()  # 按时间顺序排序,正序输出-- 字典为元素的列表如何用字典的某个值排序??
-    # 打印明细报表
-    print('-' * 120)
+
+# 打印明细报表
+
+    f = None
+    if filename:
+        f = open(filename, 'a')
+        print('\n' * 4, file=f)
+
+
+    print('-' * 120, file=f)
     print(
         '|{:^5}|{:^8}|{:^10}|{:^12}|{:^16}|{:^6}|{:^4}|{:>8}|{:^14}|{:^10}|{:^6}|{:^8}|'.format('No.', 'symbol'.upper(),
                                                                                                 'qty', 'price',
@@ -63,8 +71,8 @@ def print_report():
                                                                                                 'side', 'fill_amt',
                                                                                                 'executed_value',
                                                                                                 'fill_fees', 'source',
-                                                                                                'state'))
-    print('-' * 120)
+                                                                                                'state'), file=f)
+    print('-' * 120, file=f)
     for k in range(len(mx_sort)):
         strcount = '|{:>4d}'.format(count)
         for order in tradelist:
@@ -75,13 +83,17 @@ def print_report():
                              datetime.fromtimestamp(int(order['created_at'] / 1000)).strftime("%Y%m%d %H%M%S"),
                              order['type'], order['side'], float(order['filled_amount']),
                              float(order['executed_value']),
-                             float(order['fill_fees']), order['source'], order['state']))
+                             float(order['fill_fees']), order['source'], order['state']), file=f)
 
                 count += 1
 
-    print('-' * 120)
+    print('-' * 120, file=f)
 
-    # 统计数据, 从下载来的 tradelist  统计并保存汇总结果到 tradecount 字典变量中
+
+
+
+
+# 统计数据, 从下载来的 tradelist  统计并保存汇总结果到 tradecount 字典变量中
 
     for tradelist_line in tradelist:
 
@@ -120,9 +132,11 @@ def print_report():
 
     # 汇总结果, 交易量,金额,均价,手续费
     # for symbol in tradecount_symbol:
+
+
     for data in tradecount:
-        print('-' * 120)
-        print('{}:'.format(data['symbol']))
+        print('-' * 120, file=f)
+        print('{}:'.format(data['symbol']), file=f)
         if data['sellqty'] > 0:
             sellavg = data['sellamt'] / data['sellqty']
         else:
@@ -134,12 +148,14 @@ def print_report():
             buyavg = 0
       #币种卖出统一称之为数量,  计价货币 称为金额
         print('卖出数量 : {:<10.2f} \t\t卖出金额 : {:<10.2f} \t\t卖出均价 : {:<14.6f}\t\t手续费 :  {:<8.2f} '
-              .format(data['sellqty'], data['sellamt'],  sellavg, data['sellfee']))
+              .format(data['sellqty'], data['sellamt'],  sellavg, data['sellfee']), file=f)
         print('买入数量 : {:<10.2f} \t\t买入金额 : {:<10.2f} \t\t买入均价 : {:<14.6f}\t\t手续费 :  {:<8.2f} '
-              .format(data['buyqty'], data['buyamt'],  buyavg, data['buyfee']))
+              .format(data['buyqty'], data['buyamt'],  buyavg, data['buyfee']), file=f)
 
-    print('-' * 120)
+    print('-' * 120, file=f)
 
+    if filename:
+        f.close()
 
 if __name__ == '__main__':
     print('正在计算中，请耐心等待...')
