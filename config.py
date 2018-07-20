@@ -42,8 +42,17 @@ symbol_type = list(conf.get(section, "symbol_type").replace(' ', '').split(','))
 # 买卖间隔时间
 second = int(conf.get(section, "second"))
 
+
 # 需要计算手续费的开始时间
 fees_start_time = dict(zip(['year', 'month', 'day', 'hour', 'minute', 'second'], map(int, list(conf.get(section,"fees_start_time").split(' ')))))
+
+# 邮件发送相关的设置
+from_addr = conf.get(section, "from_addr")
+password = conf.get(section, "password") #QQmail在第三方登录邮箱需要在:设置->帐户->POP3... 开启并获取 CardDAV 服务和授权码
+to_addr = conf.get(section, "to_addr")
+smtp_server = conf.get(section, "smtp_server")
+filename = conf.get(section, "filename")
+
 
 print('当前参数设置如下: ')
 print('下单数量(amount) : ', amount)
